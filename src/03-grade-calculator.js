@@ -26,4 +26,50 @@
  */
 export function calculateGrade(score, hasExtraCredit) {
   // Your code here
-}
+  const bonus = 5;
+  let grade;
+  let finalScore;
+
+  if(score < 0 || score > 100){
+    return "INVALID"
+  }
+
+  if(hasExtraCredit && score <= 95){
+    finalScore = score + bonus;
+  }else if(hasExtraCredit && [96, 97, 98, 99, 100].includes(score)){
+    finalScore = 100;
+  }else if(!hasExtraCredit){
+    finalScore = score;
+  }
+
+  switch(true){
+    case (finalScore >= 90 && finalScore <= 100):
+      grade = "A";
+      break;
+    case (finalScore >= 80 && finalScore <=89):
+      grade = "B";
+      break;
+    case (finalScore >= 70 && finalScore <= 79):
+      grade = "C";
+      break;
+    case (finalScore >= 60 && finalScore <= 69):
+      grade = "D";
+      break;
+    default:
+      grade = "F";
+    }
+
+      return grade;
+  }
+
+// Unit testing
+// console.log(calculateGrade(49,false));
+// console.log(calculateGrade(59,false));
+// console.log(calculateGrade(69,false));
+// console.log(calculateGrade(79,false));
+// console.log(calculateGrade(84,true));
+// console.log(calculateGrade(89,true));
+// console.log(calculateGrade(90,true));
+// console.log(calculateGrade(95,true));
+// console.log(calculateGrade(96,true));
+// console.log(calculateGrade(100,true));
