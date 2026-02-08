@@ -34,4 +34,28 @@
  */
 export function canBorrowBook(memberAge, hasValidCard, overdueBooks) {
   // Your code here
+  const response = {allowed: true, message: "You may borrow up to 3 books"};
+  
+  if( memberAge < 6 ){
+    response.allowed = false;
+    response.message = "Too young - must be at least 6 years old";
+    return response;
+  } else if( !hasValidCard){
+    response.allowed = false;
+    response.message = "Invalid library card - please renew at the front desk";
+    return response;
+  } else if( overdueBooks){
+    response.allowed = false;
+    response.message = `Please return your ${overdueBooks} overdue book(s) first`;
+    return response; 
+  }
+
+  return response;
 }
+
+// // Unit tests
+// console.log(canBorrowBook(5,true,2));
+// console.log(canBorrowBook(6,false,2));
+// console.log(canBorrowBook(7,true,1));
+// console.log(canBorrowBook(15,false,0));
+// console.log(canBorrowBook(12,true,0));
