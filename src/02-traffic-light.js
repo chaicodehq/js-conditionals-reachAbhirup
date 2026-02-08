@@ -23,4 +23,31 @@
  */
 export function getTrafficAction(color) {
   // Your code here
+  const caseInsensitiveInputSignal = color.toLocaleLowerCase();
+  let outputSignal;
+
+  switch(caseInsensitiveInputSignal){
+    case "green":
+      outputSignal = "GO";
+      break;
+    case "yellow":
+      outputSignal = "SLOW DOWN";
+      break;
+    case "red":
+      outputSignal = "STOP";
+      break;
+    case "flashing red":
+      outputSignal = "STOP AND PROCEED WITH CAUTION";
+      break;
+    default:
+      outputSignal = "INVALID SIGNAL";
+  }
+
+  return outputSignal;
 }
+
+// Unit Tests
+// console.log(getTrafficAction("Red"))
+// console.log(getTrafficAction("yellow"))
+// console.log(getTrafficAction("FLASHING RED"))
+// console.log(getTrafficAction("FLASHING"))
