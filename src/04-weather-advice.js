@@ -22,4 +22,46 @@
  */
 export function getWeatherAdvice(temperature, isRaining) {
   // Your code here
+  let response;
+
+  switch(true){
+    case ( temperature >= 35):
+      response = "Too hot for hiking - stay indoors and hydrate";
+      break;
+    case ( temperature >= 25 && !isRaining):
+      response = "Great weather for hiking - don't forget sunscreen";
+      break;
+    case ( temperature >= 25 && isRaining):
+      response = "Warm but rainy - consider indoor activities";
+      break;
+    case ( temperature >= 15 && !isRaining):
+      response = "Perfect hiking weather - enjoy the trails";
+      break;
+    case ( temperature >= 15 && isRaining):
+      response = "Cool and rainy - bring waterproof gear if hiking";
+      break;
+    case ( temperature >= 5 && !isRaining):
+      response = "Chilly - wear layers for your hike";
+      break;
+    case ( temperature >= 5 && isRaining):
+      response = "Cold and wet - best to stay indoors";
+      break;
+    default:
+      response = "Too cold - stay warm indoors"
+  }
+
+  return response;
 }
+// Unit tests
+// console.log(getWeatherAdvice(4,true));
+// console.log(getWeatherAdvice(3,false));
+// console.log(getWeatherAdvice(5,false));
+// console.log(getWeatherAdvice(5,true));
+// console.log(getWeatherAdvice(6, false));
+// console.log(getWeatherAdvice(7, true));
+// console.log(getWeatherAdvice(15, true));
+// console.log(getWeatherAdvice(17, false));
+// console.log(getWeatherAdvice(25, true));
+// console.log(getWeatherAdvice(28, false));
+// console.log(getWeatherAdvice(35, false));
+// console.log(getWeatherAdvice(38, true));
