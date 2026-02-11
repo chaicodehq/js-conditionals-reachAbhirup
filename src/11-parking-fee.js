@@ -33,5 +33,70 @@
  * @returns {number} Parking fee or -1 for invalid input
  */
 export function calculateParkingFee(hours, vehicleType) {
-  // Your code here
+  hours = Math.ceil(hours); 
+  vehicleType = vehicleType.toLowerCase();
+
+  // Edge cases
+  if(hours <=0 || !["car", "motorcycle", "bus"].includes(vehicleType)){
+    return -1;
+  }
+
+  let parkingFee = 0;
+
+  switch(vehicleType){
+    case "car":
+      if (hours === 1){
+        parkingFee = 5;
+      }else{
+        parkingFee = (5 + (3 * (hours-1))) >= 30 ? 30 : (5 + (3 * (hours-1)));
+      }
+      break;
+    case "motorcycle":
+      if(hours === 1){
+        parkingFee = 3;
+      }else{
+        parkingFee = (3 + (2 * (hours-1))) >= 18 ? 18 : (3 + (2 * (hours-1)));
+      }
+      break;
+    case "bus":
+      if (hours === 1){
+        parkingFee = 10;
+      }else {
+        parkingFee = (10 + (7 * (hours-1))) >= 60 ? 60 : (10 + (7 * (hours-1)));
+      }
+      break;
+    default:
+      parkingFee = -1;
+  }
+
+  return parkingFee;
 }
+
+/*
+ 11 - City Central: Parking Fee Calculator (9 pts)
+    Car rates
+      ✓ Car, 1 hour → $5 (3 ms)
+      ✕ Car, 3 hours → $5 + $3 + $3 = $11 (3 ms)
+      ✕ Car, 5 hours → $5 + 4×$3 = $17 (2 ms)
+      ✓ Car, 10 hours → $5 + 9×$3 = $32 → capped at $30 (1 ms)
+    Motorcycle rates
+      ✓ Motorcycle, 1 hour → $3 (1 ms)
+      ✕ Motorcycle, 4 hours → $3 + 3×$2 = $9 (1 ms)
+      ✓ Motorcycle, 12 hours → $3 + 11×$2 = $25 → capped at $18 (1 ms)
+    Bus rates
+      ✕ Bus, 1 hour → $10 (2 ms)
+      ✕ Bus, 3 hours → $10 + 2×$7 = $24 (2 ms)
+      ✓ Bus, 10 hours → $10 + 9×$7 = $73 → capped at $60 (1 ms)
+    Partial hours (round up)
+      ✓ Car, 0.5 hours → rounds up to 1 → $5 (1 ms)
+      ✕ Car, 1.1 hours → rounds up to 2 → $5 + $3 = $8 (1 ms)
+      ✕ Motorcycle, 2.5 hours → rounds up to 3 → $3 + 2×$2 = $7 (1 ms)
+    Invalid input
+      ✓ 0 hours → -1 (1 ms)
+      ✓ Negative hours → -1 (1 ms)
+      ✓ Unknown vehicle "truck" → -1 (1 ms)
+*/
+
+
+
+console.log(calculateParkingFee(3, "Car"));

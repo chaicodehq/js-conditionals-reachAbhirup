@@ -31,4 +31,50 @@
  */
 export function calculateTip(billAmount, serviceRating) {
   // Your code here
+  if(billAmount <= 0 || ![1, 2, 3, 4, 5].includes(serviceRating)){
+    return null;
+  }
+  
+  const finalBill = {};
+
+  switch(serviceRating){
+    case 1:
+      finalBill.tipPercentage = 5;
+      finalBill.tipAmount = .05 * billAmount;
+      finalBill.totalAmount = billAmount + finalBill.tipAmount;
+      break;
+    case 2:
+      finalBill.tipPercentage = 10;
+      finalBill.tipAmount = billAmount * 0.1;
+      finalBill.totalAmount = billAmount + finalBill.tipAmount;
+      break;
+    case 3:
+      finalBill.tipPercentage = 15;  
+      finalBill.tipAmount = billAmount * 0.15;
+      finalBill.totalAmount = billAmount + finalBill.tipAmount;
+      break;
+    case 4:
+      finalBill.tipPercentage = 20;  
+      finalBill.tipAmount = billAmount * 0.2;
+      finalBill.totalAmount = billAmount + finalBill.tipAmount;
+      break;
+    case 5:
+      finalBill.tipPercentage = 25;  
+      finalBill.tipAmount = billAmount * 0.25;
+      finalBill.totalAmount = billAmount + finalBill.tipAmount;
+      break;
+    default:
+      finalBill.tipPercentage = 0;  
+      finalBill.tipAmount = 0;
+      finalBill.totalAmount = 0;
+  }
+  return finalBill;
 }
+
+// unit tests
+// console.log(calculateTip(0, 5));
+// console.log(calculateTip(50, 5));
+// console.log(calculateTip(50, 4));
+// console.log(calculateTip(50, 3));
+// console.log(calculateTip(50, 2));
+// console.log(calculateTip(50, 1));
